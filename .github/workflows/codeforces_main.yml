@@ -1,17 +1,13 @@
-name: Trigger Codeforces Script Workflow
+name: Trigger Codeforces Script
 
-on:
-  workflow_dispatch:
+on: [push] # Or any other trigger
 
 jobs:
-  trigger-workflow:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Send repository_dispatch
-        run: |
-          curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer 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" \
-            https://api.github.com/repos/sreegithub19/codeforces_script/dispatches \
-            -d '{"event_type": "trigger-codeforces-script"}'
+  call_codeforces_script:
+    uses: sreegithub19/codeforces_script/.github/workflows/main.yml@main
+    # Pass any inputs or secrets defined in the reusable workflow
+    # with:
+    #   some_input: 'some value'
+    # secrets:
+    #   api_key: ${{ secrets.CODEFORCES_API_KEY }}
+    secrets: inherit # If the calling workflow needs to pass its own secrets
