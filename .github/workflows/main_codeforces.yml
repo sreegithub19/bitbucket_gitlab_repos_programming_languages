@@ -1,5 +1,6 @@
 name: Git submodules sync and trigger another pipeline
 
+
 on:
   push:
     branches:
